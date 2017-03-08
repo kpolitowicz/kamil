@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+chang_info "Running chang build"
+chang_create_volume_if_not_exists ${RUBY_CACHE_VOLUME}
+chang_create_network_if_not_exists ${PRIVATE_NETWORK}
+
+$BIN/stop
+
+$BIN/docker/up mysql
+
+if ! $BIN/bundle/check; then
+  chang_info "Running bundle install"
+  $BIN/bundle/install
+fi
+
+$BIN/db/migrate_or_setup
+
+chang_info "Chang build finished"
+chang_state_update_commit "${ENV_WATCH}"

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+for service in ${@:-rails webpack}; do
+  if ! test -z $(chang_running_container_name ${service}); then
+    $BIN/docker/docker stop ${service}
+    $BIN/docker/up ${service}
+  fi
+done

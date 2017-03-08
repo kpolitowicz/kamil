@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+chang_install
+
+$BIN/check
+$BIN/docker/up rails
+$BIN/status

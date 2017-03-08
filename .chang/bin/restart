@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+$BIN/docker/docker stop "${@:-rails}"
+$BIN/docker/up "${@:-rails}"
+$BIN/ps

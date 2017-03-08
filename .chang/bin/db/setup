@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+$BIN/rails/rails db:setup ${@:+"$@"}
+chang_marker_mark_branch db/migrate
+chang_marker_mark_commit db/migrate

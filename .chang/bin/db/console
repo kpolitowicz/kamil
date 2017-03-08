@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+container=$(chang_running_container_name mysql)
+if [[ -z ${container} ]]; then
+  echo "Starting mysql..."
+  $BIN/docker/up mysql
+  sleep 1
+fi
+
+$BIN/docker/exec mysql mysql -u root

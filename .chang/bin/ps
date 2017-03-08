@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+$BIN/docker/docker ps ${@:+"$@"}
+chang_info "http://${CHANG_PWD##*/}.dev"

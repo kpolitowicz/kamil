@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+git checkout ${@:+"$@"}
+
+hal stop
+hal start

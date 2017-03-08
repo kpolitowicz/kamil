@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+$BIN/bundle/bundle check
+chang_marker_mark_commit ${BUNDLE_WATCH}

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+$BIN/db/console -t -d "${DB_PREFIX}_development" -c '\dt' | grep -cqw 'schema_migrations'

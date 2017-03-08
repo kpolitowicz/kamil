@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+container=$(chang_running_container_name ${1:?})
+if [[ -z ${container} ]]; then
+  fail "Container is not running"
+fi
+docker exec -it "${container}" "${@:2}"

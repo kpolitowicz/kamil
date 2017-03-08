@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+$BIN/debug/rails

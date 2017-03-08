@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+$BIN/stop rails
+$BIN/docker/run --name ${CHANG_APP_NETWORK_ID} rails

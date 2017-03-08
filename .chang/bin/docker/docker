@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+export COMPOSE_FILE=".chang/docker/docker-compose.yml"
+docker-compose ${@:+"$@"}

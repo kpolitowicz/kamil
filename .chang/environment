@@ -1,0 +1,8 @@
+export RAILS_ENV=development
+export RUBY_CACHE_VOLUME=ruby-bundle-cache-2.3.3_${CHANG_APP_HASH}
+export RUBY_IMAGE=majkel/kamil-ruby-2.3.3
+export MYSQL_IMAGE=mysql:5.7.17
+export DB_PREFIX=rails_$(chang_current_branch)
+export ENV_WATCH=.chang/environment,.chang/docker/docker-compose.yml
+export BUNDLE_WATCH=Gemfile.lock
+export PRIVATE_NETWORK=hal_${CHANG_APP_HASH}

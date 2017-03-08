@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+if $BIN/db/check; then
+  chang_info "Running migrations"
+  $BIN/db/migrate
+else
+  chang_info "Setting up a new database"
+  $BIN/db/setup
+fi
+
+chang_marker_mark_branch db/migrate
+chang_marker_mark_commit db/migrate

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+$BIN/docker/exec_or_run ruby \
+  bundle ${@:-install --verbose --jobs=10 --without staging production jenkins osx_dev}

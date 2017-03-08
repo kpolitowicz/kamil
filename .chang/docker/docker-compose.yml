@@ -1,0 +1,56 @@
+version: '2'
+services:
+
+  ruby:
+    image: ${RUBY_IMAGE}
+    user: app
+    volumes:
+      - ruby-bundle-cache:/home/app/.bundle
+      - app:/home/app/app:nocopy
+    working_dir: /home/app/app
+    environment:
+      - GEM_PATH=/home/app/.bundle
+      - BUNDLE_PATH=/home/app/.bundle
+      - BUNDLE_APP_CONFIG=/home/app/.bundle
+    networks:
+      private: {}
+      chang:
+        aliases:
+          - ${CHANG_APP_NETWORK_ID}
+    tty: true
+
+  rails:
+    extends: ruby
+    command: bash -c "rm -f tmp/pids/server.pid; bin/rails s -b 0.0.0.0"
+    environment:
+      - MYSQL_URL="mysql://app:123@mysql"
+      - RAILS_ENV=${RAILS_ENV}
+      - DB_PREFIX=${DB_PREFIX}
+    depends_on:
+      - mysql
+    stop_signal: SIGKILL
+
+  mysql:
+    image: ${MYSQL_IMAGE}
+    environment:
+      - MYSQL_USER=app
+      - MYSQL_PASSWORD=321
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    networks:
+      - private
+
+volumes:
+  ruby-bundle-cache:
+    external:
+      name: ${RUBY_CACHE_VOLUME}
+  app:
+    external:
+      name: ${CHANG_VOLUME}
+
+networks:
+  private:
+    external:
+      name: ${PRIVATE_NETWORK}
+  chang:
+    external:
+      name: chang

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+$BIN/stop ${1}
+$BIN/docker/docker up ${1}

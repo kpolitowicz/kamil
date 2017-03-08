@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+if ! chang_marker_check_commit .changignore; then
+  chang_info ".changignore changed, restarting chang-sync"
+  hal-sync restart > /dev/null
+  chang_marker_mark_commit .changignore
+fi
+
+if ! chang_state_compare_commit "${ENV_WATCH}"; then
+  $BIN/build
+  exit 0
+fi
+
+if ! chang_marker_check_commit "${BUNDLE_WATCH}"; then
+  if ! $BIN/bundle/check; then
+    chang_info "Running bundle install"
+    $BIN/bundle/install
+    $BIN/restart_if_running rails
+  fi
+fi
+
+if ! $BIN/db/check; then
+  $BIN/db/migrate_or_setup
+elif ! chang_marker_check_commit db/migrate; then
+  chang_info "Running database migrations"
+  $BIN/db/migrate
+fi
+

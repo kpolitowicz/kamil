@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+service_name=${1}
+compose_prefix=${COMPOSE_PROJECT_NAME##*_}
+
+set +e
+running_container=$(docker ps | grep -oE "[a-zA-Z0-9_-]+${compose_prefix}_${service_name}_1")
+set -e
+
+if [[ -n $running_container ]]; then
+  docker exec -it $running_container "${@:2}"
+else
+  $BIN/docker/run ${@:+"$@"}
+fi

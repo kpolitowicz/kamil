@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set ${CHANG_SET}
+
+chang_info "Resetting the application"
+
+rm -rf ${CHANG_TMP_PATH}
+$BIN/stop
+$BIN/docker/docker down --volumes --remove-orphans
+docker volume rm -f ${RUBY_CACHE_VOLUME} >/dev/null
+
+chang_info "Chang environment has been reset, recreating"
+
+$BIN/start
