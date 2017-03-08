@@ -2,4 +2,4 @@
 
 set ${CHANG_SET}
 
-$BIN/rails/rails db:rollback ${@:+"$@"}
+$BIN/rake db:rollback ${@:+"$@"}
