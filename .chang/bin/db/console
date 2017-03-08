@@ -9,4 +9,4 @@ if [[ -z ${container} ]]; then
   sleep 1
 fi
 
-$BIN/docker/exec mysql mysql -u root
+$BIN/docker/exec mysql mysql -u root ${@:+"$@"}
