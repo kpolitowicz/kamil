@@ -2,4 +2,8 @@
 
 set ${CHANG_SET}
 
+# Postgresql
+# $BIN/db/console -t -d "${DB_PREFIX}_development" -c '\dt' | grep -cqw 'schema_migrations'
+
+# MySQL
 $BIN/db/console -e 'show tables' "${DB_PREFIX}_development" | grep -cqw 'schema_migrations'
