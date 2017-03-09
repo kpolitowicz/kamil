@@ -2,6 +2,6 @@
 
 set ${CHANG_SET}
 
-$BIN/rails/rails db:setup ${@:+"$@"}
+$BIN/$DB_COMMAND_RUNNER db:setup ${@:+"$@"}
 chang_marker_mark_branch db/migrate
 chang_marker_mark_commit db/migrate

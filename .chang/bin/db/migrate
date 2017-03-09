@@ -2,4 +2,4 @@
 
 set ${CHANG_SET}
 
-$BIN/rails/rails db:migrate ${@:+"$@"}
+$BIN/$DB_COMMAND_RUNNER db:migrate ${@:+"$@"}
