@@ -6,3 +6,7 @@ export DB_PREFIX=rails_$(chang_current_branch)
 export ENV_WATCH=.chang/environment,.chang/docker/docker-compose.yml
 export BUNDLE_WATCH=Gemfile.lock
 export PRIVATE_NETWORK=hal_${CHANG_APP_HASH}
+
+# Use rails/rails for Rails 5+
+# export DB_COMMAND_RUNNER=rails/rails
+export DB_COMMAND_RUNNER=rake
